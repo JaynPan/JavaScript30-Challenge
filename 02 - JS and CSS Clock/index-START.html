@@ -62,12 +62,50 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 100%;
+      transition: 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1)
     }
-
   </style>
 
   <script>
+    
+    const hand       = document.querySelector('.hand');
+    const secondHand = document.querySelector('.second-hand');
+    const minuteHand = document.querySelector('.min-hand');
+    const hoursHand  = document.querySelector('.hour-hand');
+    
+    function checkFlicker(ele, deg) {
+      if(deg == 90){
+        ele.style.transition = '0s';
+      }
+    }
 
+    function setDate() {
+
+      const date      = new Date();
+      const seconds   = date.getSeconds();
+      const minutes   = date.getMinutes();
+      const hours     = date.getHours();
+
+      const secondsRotate = seconds*6 + 90;
+      const minutesRotate = minutes*6 + 90;
+      const hoursRotate   = hours*30 + (minutes*30)/60 + 90;
+
+      secondHand.style.transform = `rotate(${secondsRotate}deg)`;
+      minuteHand.style.transform = `rotate(${minutesRotate}deg)`;
+      hoursHand.style.transform  = `rotate(${hoursRotate}deg)`;
+
+      checkFlicker(secondHand, secondsRotate);
+      checkFlicker(minuteHand, minutesRotate);
+      checkFlicker(hoursHand, hoursRotate);
+
+      console.log(hours+ ' : ' + minutes +' : ' + seconds);
+
+    }
+
+    setInterval(setDate, 1000);
 
   </script>
 </body>
