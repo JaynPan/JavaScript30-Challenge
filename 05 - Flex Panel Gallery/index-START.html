@@ -26,6 +26,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -34,6 +35,10 @@
       color: white;
       text-align: center;
       align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
       /* Safari transitionend event.propertyName === flex */
       /* Chrome + FF transitionend event.propertyName === flex-grow */
       transition:
@@ -56,7 +61,16 @@
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    
+    .panel > *:first-child { transform: translateY(-100%); }
+    .panel.open-active > *:first-child { transform: translateY(0); }
+    .panel > *:last-child { transform: translateY(100%); }
+    .panel.open-active > *:last-child { transform: translateY(0); }
 
     .panel p {
       text-transform: uppercase;
@@ -70,6 +84,7 @@
     }
 
     .panel.open {
+      flex: 5;
       font-size: 40px;
     }
 
@@ -105,6 +120,27 @@
   </div>
 
   <script>
+    const pics = document.querySelectorAll('.panel');
+    var prevIndex = 0;
+
+    // pic.forEach(pic => pic.addEventListener('click'), opening);
+    for(let i=0; i < pics.length; i++ ) {
+      
+      pics[i].addEventListener('click', opening);     
+      
+      function opening() {
+        if(i != prevIndex) {
+          pics[prevIndex].classList.remove('open-active');
+          pics[prevIndex].classList.remove('open');
+        }
+
+        
+        pics[i].classList.toggle('open');
+        
+        prevIndex = i;
+      }     
+    }
+
 
   </script>
 
