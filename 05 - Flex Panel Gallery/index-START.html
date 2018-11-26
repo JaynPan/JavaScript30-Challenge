@@ -125,7 +125,7 @@
 
     // pic.forEach(pic => pic.addEventListener('click'), opening);
     for(let i=0; i < pics.length; i++ ) {
-      
+
       pics[i].addEventListener('click', opening);     
       
       function opening() {
@@ -136,6 +136,7 @@
 
         
         pics[i].classList.toggle('open');
+        pics[i].classList.toggle('open-active');
         
         prevIndex = i;
       }     
