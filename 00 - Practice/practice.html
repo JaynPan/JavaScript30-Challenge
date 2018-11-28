@@ -22,7 +22,7 @@
     <div class="boxes"></div>
 </body>
 <script>
-
+//Closure Practice
 //呼叫函式內的函示，將記憶體封存在內層
 function callMethod(newMoney) {
     var money = newMoney;
@@ -41,11 +41,9 @@ let updateMyMoney = callMethod(100000);
 let updateYourMoney = callMethod(100); //初始儲值的錢 //再次執行則為
 
 
-
-//what is IIFE: Immediately-invoked, function and expression
+// 1. mainipulate the DOM
+// 2. what is IIFE: Immediately-invoked, function and expression
 (function(howMany, colors){
-
-//mainipulate the DOM
 
 var colorAmount = colors.length;
     const boxes = document.querySelector('.boxes');
@@ -66,8 +64,6 @@ var colorAmount = colors.length;
     boxes.addEventListener('click', function(e){
         e.target.parentElement.removeChild(e.target);
     });
-
-
 
 })(20,[
         'orange',
