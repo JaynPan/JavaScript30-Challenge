@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+.box {
+    display: block;
+    background: #DDD;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    float: left;
+    margin: 5px;
+}
+</style>
+
+<body>
+    <div class="boxes"></div>
+</body>
+<script>
+
+//呼叫函式內的函示，將記憶體封存在內層
+function callMethod(newMoney) {
+    var money = newMoney;
+    var storeMoney;
+    changeMoney = function(storeMoney) { //儲值的錢
+    money = money + storeMoney;
+    }
+
+    //這是一個closure
+    return function(price) {
+    money = money - price;
+    return money;
+    }
+}
+let updateMyMoney = callMethod(100000);
+let updateYourMoney = callMethod(100); //初始儲值的錢 //再次執行則為
+
+
+
+//what is IIFE: Immediately-invoked, function and expression
+(function(howMany, colors){
+
+//mainipulate the DOM
+
+var colorAmount = colors.length;
+    const boxes = document.querySelector('.boxes');
+    var currentColor = 0;
+
+    for(let i=0; i < howMany; i++){
+        if(currentColor ===  colorAmount-1){
+            currentColor = 0;
+        }else {
+            currentColor ++;
+        }
+        const box = document.createElement('div');
+        box.classList.add('box');
+        box.style.backgroundColor = colors[currentColor];
+        boxes.appendChild(box);
+    }
+
+    boxes.addEventListener('click', function(e){
+        e.target.parentElement.removeChild(e.target);
+    });
+
+
+
+})(20,[
+        'orange',
+        'blue',
+        'red',
+        'yellow',
+        'black',
+        ]
+);
+
+
+
+
+
+
+</script>
+</html>
