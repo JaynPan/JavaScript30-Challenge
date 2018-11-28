@@ -16,9 +16,20 @@
     float: left;
     margin: 5px;
 }
+.menu-items.hidden {
+    display: none;
+}
 </style>
 
 <body>
+    <header>
+        <button class="ham" id="top-menu">Hamburger Menu</button>
+        <ul class="menu-items">
+            <li>Home</li>
+            <li>About</li>
+            <li>Products</li>
+        </ul>
+    </header>
     <div class="boxes"></div>
 </body>
 <script>
@@ -75,9 +86,31 @@ var colorAmount = colors.length;
 );
 
 
+// Callbacks Practice
+// 1. Excuted asynchronously 
+// 2. Often tied to events
+// 3. Uses "anonymous functions" cuz most of the time invoked immediately once the event takes place 
 
 
+// How Constructors Work
+// 1. Using objects
+// 2. Objects & closures
+// 3. function method
+function hamburger(nodeName) {
+    var MyNode = document.querySelector(nodeName + '.ham');
 
+    return {
+        activate: function(){
+            MyNode.addEventListener('click', function(e){
+                e.target.parentNode.querySelector('.menu-items').classList.toggle('hidden');
+            })
+        }
+    }
 
+}
+
+const topMenu = new hamburger('#top-menu');
+
+topMenu.activate();
 </script>
 </html>
