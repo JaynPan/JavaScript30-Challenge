@@ -57,7 +57,17 @@ body {
 .player__button:focus {
   border-color: #ffc600;
 }
-
+.fullscreen {
+  background: none;
+  border: 0;
+  line-height: 1;
+  color: white;
+  text-align: center;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  max-width: 50px;
+}
 .player__slider {
   width: 10px;
   height: 30px;
@@ -101,7 +111,7 @@ body {
   width: 50%;
   background: #ffc600;
   flex: 0;
-  flex-basis: 50%;
+  flex-basis: 0%;
 }
 
 /* unholy css to style input type="range" */
