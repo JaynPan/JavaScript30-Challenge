@@ -7,6 +7,24 @@
 </head>
 <body>
 <script>
+const pressed = [];
+const secretCode = 'wesbos';
+
+window.addEventListener('keyup', (e) => {
+  pressed.push(e.key);
+  console.log(pressed.length);
+  pressed.splice(-secretCode.length -1, pressed.length - secretCode.length);
+  // when |-secretCode.length -1| > pressed.length => start from the first array element
+  // |-7| > 6 => remove the first array element 
+
+  // pressed.length - secretCode.length => if value is 0 or negative, no elements will be removed
+  // that means before the pressed array element not bigger than the secretCode, will only add ele into and won't remove
+  // however, if pressed.length = 7 - secretCode.length = 6 .. will be 1, so start removing 1 element
+  if(pressed.join('').includes(secretCode)) {
+    cornify_add();
+  }
+  console.log(pressed);
+})
 </script>
 </body>
 </html>
