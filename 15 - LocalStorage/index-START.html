@@ -23,13 +23,75 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <button onclick="clearItemList()">Clear</button>
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || [];
 
+
+  function handleAddItems(e) {
+    e.preventDefault();
+    const text = this.querySelector('[name="item"]').value;
+    const item = {
+      text: text,
+      done: false
+    }
+    items.push(item);
+  
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+    this.reset();
+  }
+
+  function populateList(plates = [], platesList) {
+    platesList.innerHTML = plates.map((item, i) => {
+      return `
+      <li>
+        <input type="checkbox" data-index=${i} id="item${i}" ${item.done ? 'checked' : ''}/>
+        <label for="item${i}">${item.text}</label>
+        <button data-index=${i}>X</button>
+      </li>
+      `
+    }).join('');
+  }
+
+  function toggleDone(e) {
+    //only target the input checkbox element
+    if(!e.target.matches('input'))return;
+    
+    const el = e.target;
+    //use dataset get the data of that checkbox index 
+    const index = el.dataset.index;
+    items[index].done = !items[index].done;
+    //setItem('application->local Storage -> file/ -> key', should be String (use JSON.stringify() ))
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+  
+  function deleteItem(e) {
+    if(!e.target.matches('button'))return;
+
+    const index = e.target.dataset.index;
+    items.splice(index, 1);
+
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  function clearItemList() {
+    items.length = 0;
+    localStorage.setItem('items', JSON.stringify(items) );
+    populateList(items, itemsList);   
+  }
+
+  addItems.addEventListener('submit', handleAddItems);
+  itemsList.addEventListener('click', toggleDone);
+  itemsList.addEventListener('click', deleteItem);
+
+  populateList(items, itemsList);
 </script>
 
 

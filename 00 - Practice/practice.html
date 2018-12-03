@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./p5.js"></script>
     <title>Document</title>
 </head>
 <style>
+.boxes {
+    display: flex;
+    flex-wrap: wrap;
+}
 .box {
     display: block;
     background: #DDD;
     width: 100px;
     height: 100px;
     border-radius: 10px;
-    float: left;
     margin: 5px;
 }
 .menu-items.hidden {
@@ -31,6 +35,13 @@
         </ul>
     </header>
     <div class="boxes"></div>
+
+    <!-- loading json data from a url -->
+    <div>
+        <ul class="jsonDataDisplay">
+            
+        </ul>
+    </div>
 </body>
 <script>
 //Closure Practice
@@ -112,5 +123,43 @@ function hamburger(nodeName) {
 const topMenu = new hamburger('#top-menu');
 
 topMenu.activate();
+
+ 
+ //Loading data from a URL (Asynchronous Callbacks)
+ //https://www.youtube.com/watch?v=6mT3r8Qn1VY
+ 
+const endpoint = 'http://api.open-notify.org/astros.json';
+const displayArea = document.querySelector('.jsonDataDisplay');
+const array = [];
+let dataStore = {};
+const getData = fetch(endpoint)
+                .then(function(response){
+                  return response.json();
+                })
+                .then(function(data){
+                    dataStore = data;
+                    console.log(dataStore);
+                    dothing(data);  
+                })
+                .catch(error => console.log(error));
+
+
+function dothing(data) {
+    for(let i=0; i< data.number; i++){
+      console.log(i);
+    }
+    displayArea.innerHTML = dataStore.people.map(person => {
+    return (
+        `<li>${person.name}</li>`
+    )                              
+    }).join('');
+}
+// function setup() {
+//     loadJSON("http://api.open-notify.org/astros.json", getData, 'jsonp');
+// }
+
+// function getData(data) {
+//     console.log(data);
+// }
 </script>
 </html>
