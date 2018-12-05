@@ -182,6 +182,36 @@
     </li>
   </ul>
 <script>
+  const dataList = [...document.querySelectorAll('[data-time]')];
+
+  const getdatatime = dataList
+                        .map(dataItem => dataItem.dataset.time)
+                        .map(timeCode => {
+                          
+                          //after split will return an array, so I can map again to convert all string to number
+                          // const splitTime = timeCode.split(":");
+                          const [min, sec] = timeCode.split(":").map(parseFloat);
+                          // const min = splitTime[0];
+                          // const sec = splitTime[1];
+                          return min*60 + sec;
+                          
+                        })
+                        // .map(stringItem => {
+                        //   const convert = stringItem.map(parseFloat);
+
+                        //   return convert[0]*60 + convert[1];                     
+                        // })
+                        .reduce((total, value) => {
+                          return total + value;
+                        });
+                        
+  
+  const hours = Math.floor(getdatatime/3600);
+  const mins = Math.floor(( getdatatime%3600 ) / 60);
+  const sec = getdatatime - hours*3600 - mins*60;
+
+  console.log(`${hours} : ${mins} : ${sec}`);
+
 </script>
 </body>
 </html>
