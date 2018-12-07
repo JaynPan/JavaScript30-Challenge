@@ -21,7 +21,7 @@
     margin: 5px;
 }
 .menu-items.hidden {
-    
+    display: none;
 }
 </style>
 
@@ -110,14 +110,16 @@ var colorAmount = colors.length;
 function hamburger(nodeName) {
     var MyNode = document.querySelector(nodeName + '.ham');
 
-    return {
-        activate: function(){
+    //two syntax, both work
+    // return{
+        //activate: function(){}
+    //}
+    this.activate = function(){
             MyNode.addEventListener('click', function(e){
                 e.target.parentNode.querySelector('.menu-items').classList.toggle('hidden');
             })
-        }
     }
-
+    
 }
 
 const topMenu = new hamburger('#top-menu');
