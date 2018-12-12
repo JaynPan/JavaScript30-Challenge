@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var a=true;
+    var b= 1;
+
+    console.log(a==b); //true
+    console.log(a===b); //false
+    console.log(a==b==0); //false
+    console.log(a==b===1); //false ((a==b) === 1)
+    console.log(a==b==1); //true ((a==b) == 1)
+    console.log(a===b==1); //false((a===b) == 1)
+    console.log(1+"2"); //12
+    console.log(1+"2"+"3") //123
+    console.log(+1+"2") //12
+    console.log(+1);//1
+    console.log(+1+-"2"); //-1 The - operator casts the string "1" to a number.
+    console.log(-"2" + "2") //-22
+    console.log(-1 + + "2") //1 不能使用++ or --在中間 否則報錯，如果有空格則會將後面符號視為後面的string operator cast
+    </script>
+</body>
+</html>
