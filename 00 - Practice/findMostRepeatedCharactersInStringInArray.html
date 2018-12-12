@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+
+const array = ["a", "abc", "bb", "ccc", "abcccdc"];
+var store = [];
+//find a string in the array with the most repeated characters
+
+function findLongestString(array) {
+//把array分開成單一string
+//再傳入mostFrequentCount(elements);
+array.map(string => {      
+    store.push(mostFrequentCount(string));
+});
+
+//store Array對應了 array裡的每個string中的character repeat了幾次
+//找到最大值並且return對應的值出來
+for(let i=0; i < store.length; i++) {
+    if((Math.max.apply(null, store)) == store[i]) {
+    return array[i];
+    }
+}
+
+console.log(array[i]);  
+}
+// bins = {
+//  h: 1,
+//  e: 1,
+//}
+function mostFrequentCount(elements) {
+    var bins = {};
+    for (var i = 0; i < elements.length; i++) {
+        // 第一個值set property = 抓到property value + 1
+        // 為甚麼不能使用bins.elements[i] ??
+        bins[elements[i]] = (bins[elements[i]] || 0) + 1;
+    }
+
+    var max = 0;
+    for (x in bins) {
+    //first time: bins[x] = 1;
+    //max = compared(0, 1) = 1;
+    //update max = 1;
+
+    //second time: bins[x] = 2;
+    //max = compareed(1, 2);
+    //update max = 2;
+    max = Math.max(max, bins[x]);
+    }
+
+    return max;
+}
+
+
+
+</script>
+</body>
+</html>
