@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+</body>
+
+<script>
+    const nodes = document.getElementsByTagName('button');
+    
+    for(let i=0; i < nodes.length; i++ ){
+        nodes[i].addEventListener('click', console.log(`this is node ${i}`));
+    }
+
+
+
+    const mainArray = ["a", "b", "c", "d", "e"];
+    const subArray = ["b", "d"];
+
+
+    function MinusSubArray(mainArray, subArray) {
+        var mainArrayIndex = 0;
+        mainArray.map(element =>　{
+            for(let i=0; i<subArray.length; i++) {
+                
+                if(element == subArray[i]) {
+                    mainArray.splice(mainArrayIndex, 1);
+                }
+                
+            }
+            mainArrayIndex++;
+        })
+
+        console.log(mainArray);
+    }
+
+
+    MinusSubArray(mainArray, subArray);
+
+    // complexFunction("a", "b"); //5 second to run the function
+    // complexFunction("a", "b"); //5 scecond to run the function
+
+    // doingCache("a", "b"); //5 scecond to run the function
+    // doingCache("a", "b"); //really fast
+
+
+    
+
+</script>
+</html>
